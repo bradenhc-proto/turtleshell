@@ -1,0 +1,19 @@
+{
+  "name": "turtleshell",
+  "version": "0.1.0",
+  "description": "Modern, asynchronous shell commands for Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turtleshelljs/turtleshell.git"
+  },
+  "author": "Braden Hitchcock <developer.hitchcock@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turtleshelljs/turtleshell/issues"
+  },
+  "homepage": "https://github.com/turtleshelljs/turtleshell#readme"
+}
