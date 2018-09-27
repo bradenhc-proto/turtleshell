@@ -16,6 +16,9 @@ let task = async () => {
         await tshell.mv(testFile, testFileMove);
         await tshell.mv(testFileMove, testFile);
 
+        let fileToCreate = 'files/test-file-created.txt';
+        await tshell.touch(fileToCreate);
+
     } catch (err) {
         console.log(err);
     }

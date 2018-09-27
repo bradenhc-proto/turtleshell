@@ -154,7 +154,39 @@ async function mv() {
     }
 }
 
-async function touch() {}
+// touch will create a new file if it does not exist. If it does exist, nothing will happen.
+//
+// ```javascript
+// const tshell = require('turtleshell');
+// let task = async () => {
+//     await tshell.touch('file.txt');
+// }
+// ```
+async function touch() {
+    let fail = message => {
+        return 'touch: failed to create file: ' + message;
+    };
+    let createFile = file =>
+        new Promise((resolve, reject) => {
+            fs.appendFile(file, '', err => {
+                if (err) return reject(fail(err.message));
+                resolve();
+            });
+        });
+    switch (arguments.length) {
+        case 0:
+            return Promise.resolve('');
+        case 1:
+            return createFile(arguments[0]);
+        default:
+            let dest = arguments[arguments.length - 1];
+            let filesToCreate = [];
+            for (let i = 0; i < arguments.length - 1; i++) {
+                filesToCreate.push(createFile(arguments[i], dest));
+            }
+            return Promise.all(filesToCreate);
+    }
+}
 
 async function mkdir() {}
 
