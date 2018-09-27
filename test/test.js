@@ -9,8 +9,13 @@ let task = async () => {
         let contents = await tshell.cat(testFile);
         console.log(contents);
 
-        let testFileCopy = 'test-file-copy.txt';
+        let testFileCopy = 'files/test-file-copy.txt';
         await tshell.cp(testFile, testFileCopy);
+
+        let testFileMove = 'files/test-file-move.txt';
+        await tshell.mv(testFile, testFileMove);
+        await tshell.mv(testFileMove, testFile);
+
     } catch (err) {
         console.log(err);
     }
