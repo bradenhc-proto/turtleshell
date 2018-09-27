@@ -19,6 +19,9 @@ let task = async () => {
         let fileToCreate = 'files/test-file-created.txt';
         await tshell.touch(fileToCreate);
 
+        let dirToCreate = 'files/dir';
+        await tshell.mkdir(dirToCreate);
+
     } catch (err) {
         console.log(err);
     }

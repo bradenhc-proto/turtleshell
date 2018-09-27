@@ -188,7 +188,30 @@ async function touch() {
     }
 }
 
-async function mkdir() {}
+async function mkdir() {
+    let fail = (message) => {
+        return 'mkdir: failed to create directory: ' + message;
+    }
+    let createDirectory = (directory) => new Promise((resolve, reject) => {
+        fs.mkdir(directory, (err) => {
+            if(err) return reject(fail(err.message));
+            resolve();
+        })
+    });
+    switch (arguments.length) {
+        case 0:
+            return Promise.resolve('');
+        case 1:
+            return createDirectory(arguments[0]);
+        default:
+            let dest = arguments[arguments.length - 1];
+            let directoriesToCreate = [];
+            for (let i = 0; i < arguments.length - 1; i++) {
+                directoriesToCreate.push(createDirectory(arguments[i], dest));
+            }
+            return Promise.all(directoriesToCreate);
+    }
+}
 
 module.exports = {
     ls,
