@@ -188,6 +188,14 @@ async function touch() {
     }
 }
 
+// mkdir will create a directory if it doesn't already exist. If it does exit, it will do nothing.
+//
+// ```javascript
+// const tshell = require('turtleshell');
+// let task = async () => {
+//     await tshell.mkdir('directory');
+// }
+// ```
 async function mkdir() {
     let fail = (message) => {
         return 'mkdir: failed to create directory: ' + message;
