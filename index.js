@@ -130,7 +130,7 @@ async function mv() {
                         fs.link(source, dest, err => {
                             if (err) reject(fail(err.message));
                             fs.unlink(source, err => {
-                                if (err) throw err;
+                                if (err) reject(fail(err.message));
                                 resolve();
                             });
                         });
@@ -152,6 +152,25 @@ async function mv() {
             }
             return Promise.all(filesToMove);
     }
+}
+
+// rm removes the files or directories specified in the arguments.
+//
+// ```javascript
+// const tshell = require('turtleshell');
+// let task = async () => {
+//     await tshell.rm('file.txt');
+// }
+// ```
+async function rm(){
+    // TODO: mimic shell (-r for recursive, -f to force, etc.)
+    let fail = (message) => 'rm: failed to remove file: ' + message;
+    let rm = (file) => new Promise((resolve, reject) => {
+        fs.unlink(file, (err) => {
+            if(err) reject(fail(err.message));
+            resolve();
+        })
+    });
 }
 
 // touch will create a new file if it does not exist. If it does exist, nothing will happen.
@@ -202,7 +221,7 @@ async function mkdir() {
     }
     let createDirectory = (directory) => new Promise((resolve, reject) => {
         fs.mkdir(directory, (err) => {
-            if(err) return reject(fail(err.message));
+            if(err && err.code !== 'EEXIST') return reject(fail(err.message));
             resolve();
         })
     });
@@ -226,6 +245,7 @@ module.exports = {
     cat,
     cp,
     mv,
+    rm,
     touch,
     mkdir
 };

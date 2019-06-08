@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/turtleshelljs/turtleshell/issues"
   },
-  "homepage": "https://github.com/turtleshelljs/turtleshell#readme"
+  "homepage": "https://github.com/turtleshelljs/turtleshell#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "winston": "^3.1.0"
+  }
 }
